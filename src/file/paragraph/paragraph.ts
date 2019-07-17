@@ -7,6 +7,7 @@ import { XmlComponent } from "file/xml-components";
 import { Alignment, AlignmentOptions } from "./formatting/alignment";
 import { Bidirectional } from "./formatting/bidirectional";
 import { Border, ThematicBreak } from "./formatting/border";
+import { Frame, IFrameAttributesProperties } from "./formatting/frame";
 import { IIndentAttributesProperties, Indent } from "./formatting/indent";
 import { KeepLines, KeepNext } from "./formatting/keep";
 import { PageBreak, PageBreakBefore } from "./formatting/page-break";
@@ -203,6 +204,11 @@ export class Paragraph extends XmlComponent {
 
     public indent(attrs: IIndentAttributesProperties): Paragraph {
         this.properties.push(new Indent(attrs));
+        return this;
+    }
+
+    public frame(attrs: IFrameAttributesProperties): Paragraph {
+        this.properties.push(new Frame(attrs));
         return this;
     }
 
