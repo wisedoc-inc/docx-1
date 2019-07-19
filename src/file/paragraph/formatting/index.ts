@@ -7,3 +7,4 @@ export * from "./spacing";
 export * from "./style";
 export * from "./tab-stop";
 export * from "./unordered-list";
+export * from "./frame";

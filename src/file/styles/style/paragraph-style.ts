@@ -1,6 +1,7 @@
 import {
     Alignment,
     AlignmentOptions,
+    Frame,
     Indent,
     ISpacingProperties,
     KeepLines,
@@ -146,6 +147,10 @@ export class ParagraphStyle extends Style {
 
     public indent(attrs: object): ParagraphStyle {
         return this.addParagraphProperty(new Indent(attrs));
+    }
+
+    public frame(attrs: object): ParagraphStyle {
+        return this.addParagraphProperty(new Frame(attrs));
     }
 
     public spacing(params: ISpacingProperties): ParagraphStyle {
