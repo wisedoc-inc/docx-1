@@ -5,6 +5,8 @@ import { File } from "file";
 import { Formatter } from "../formatter";
 import { ImageReplacer } from "./image-replacer";
 
+import { finalXml } from "../../file/paragraph/math/mathml";
+
 interface IXmlifyedFile {
     readonly data: string;
     readonly path: string;
@@ -91,14 +93,10 @@ export class Compiler {
                 data: (() => {
 
                     const tempXmlData = xml(this.formatter.format(file.Document), this.prettifyXml);
-                    // console.log("before format ---", JSON.stringify(this.formatter.format(file.Document)));
-
                     const mediaDatas = this.imageReplacer.getMediaData(tempXmlData, file.Media);
                     const xmlData = this.imageReplacer.replace(tempXmlData, mediaDatas, documentRelationshipCount);
-                    // const math = `<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:mml="http://www.w3.org/1998/Math/MathML"><m:nary><m:naryPr><m:chr m:val="∫"/><m:limLoc m:val="subSup"/><m:grow m:val="1"/><m:subHide m:val="off"/></m:naryPr><m:sub><m:r><m:t>0</m:t></m:r></m:sub><m:sup><m:r><m:t>5</m:t></m:r></m:sup><m:e/></m:nary><m:sSup><m:e><m:r><m:t>3</m:t></m:r></m:e><m:sup><m:r><m:t>2</m:t></m:r></m:sup></m:sSup><m:sSup><m:e><m:r><m:t>x</m:t></m:r></m:e><m:sup><m:r><m:t>2</m:t></m:r></m:sup></m:sSup><m:r><m:t>dx + </m:t></m:r><m:nary><m:naryPr><m:chr m:val="∫"/><m:limLoc m:val="subSup"/><m:grow m:val="1"/><m:subHide m:val="off"/></m:naryPr><m:sub><m:r><m:t>6</m:t></m:r></m:sub><m:sup><m:r><m:t>∞</m:t></m:r></m:sup><m:e/></m:nary><m:r><m:t>5</m:t></m:r><m:sSup><m:e><m:r><m:t>y</m:t></m:r></m:e><m:sup><m:r><m:t>3</m:t></m:r></m:sup></m:sSup><m:r><m:t>dy +</m:t></m:r><m:nary><m:naryPr><m:chr m:val="∑"/><m:limLoc m:val="undOvr"/><m:grow m:val="1"/><m:subHide m:val="off"/></m:naryPr><m:sub><m:r><m:t>k=0</m:t></m:r></m:sub><m:sup><m:r><m:t>n</m:t></m:r></m:sup><m:e/></m:nary><m:d><m:dPr><m:sepChr m:val=","/></m:dPr><m:e><m:f><m:fPr><m:type m:val="bar"/></m:fPr><m:num><m:r><m:t>n</m:t></m:r></m:num><m:den><m:r><m:t>k</m:t></m:r></m:den></m:f></m:e></m:d><m:r><m:t> + </m:t></m:r><m:sSubSup><m:e><m:f><m:fPr><m:type m:val="bar"/></m:fPr><m:num><m:rad><m:radPr><m:degHide m:val="on"/></m:radPr><m:deg/><m:e><m:r><m:t>467</m:t></m:r></m:e></m:rad></m:num><m:den><m:f><m:fPr><m:type m:val="bar"/></m:fPr><m:num><m:r><m:t>34</m:t></m:r></m:num><m:den><m:rad><m:radPr><m:degHide m:val="on"/></m:radPr><m:deg/><m:e><m:r><m:t>56</m:t></m:r></m:e></m:rad></m:den></m:f></m:den></m:f></m:e><m:sub/><m:sup/></m:sSubSup><m:limUpp><m:e><m:r><m:t>←</m:t></m:r></m:e><m:lim><m:r><m:t>∆</m:t></m:r></m:lim></m:limUpp></m:oMath>`;
-                    // const xxxx = xmlData.replace("<mathPlaceholder/>", math);
-                    // console.log('xmldata----', xxxx);
-                    return xmlData;
+                    const finalXmlData = finalXml(xmlData);
+                    return finalXmlData;
 
                 })(),
                 path: "word/document.xml",
