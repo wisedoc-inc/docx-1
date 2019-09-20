@@ -16,6 +16,7 @@ import { Style } from "./formatting/style";
 import { CenterTabStop, LeaderType, LeftTabStop, MaxRightTabStop, RightTabStop } from "./formatting/tab-stop";
 import { NumberProperties } from "./formatting/unordered-list";
 import { Bookmark, Hyperlink, OutlineLevel } from "./links";
+import { MathML } from "./math/math";
 import { ParagraphProperties } from "./properties";
 import { PictureRun, Run, SequentialIdentifier, TextRun } from "./run";
 
@@ -46,6 +47,10 @@ export class Paragraph extends XmlComponent {
 
     public addRun(run: Run): Paragraph {
         this.root.push(run);
+        return this;
+    }
+    public addMath(mathMl: MathML): Paragraph {
+        this.root.push(mathMl);
         return this;
     }
 

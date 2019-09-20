@@ -5,6 +5,8 @@ import { File } from "file";
 import { Formatter } from "../formatter";
 import { ImageReplacer } from "./image-replacer";
 
+import { finalXml } from "../../file/paragraph/math/mathml";
+
 interface IXmlifyedFile {
     readonly data: string;
     readonly path: string;
@@ -90,11 +92,13 @@ export class Compiler {
             },
             Document: {
                 data: (() => {
+
                     const tempXmlData = xml(this.formatter.format(file.Document), this.prettifyXml);
                     const mediaDatas = this.imageReplacer.getMediaData(tempXmlData, file.Media);
                     const xmlData = this.imageReplacer.replace(tempXmlData, mediaDatas, documentRelationshipCount);
-
-                    return xmlData;
+                    const finalXmlData = finalXml(xmlData);
+                    
+                    return finalXmlData;
                 })(),
                 path: "word/document.xml",
             },
