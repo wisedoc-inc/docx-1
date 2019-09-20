@@ -3,6 +3,7 @@ import { FootnoteReferenceRun } from "file/footnotes/footnote/run/reference-run"
 import { Image } from "file/media";
 import { Num } from "file/numbering/num";
 import { XmlComponent } from "file/xml-components";
+
 import { Alignment, AlignmentOptions } from "./formatting/alignment";
 import { Bidirectional } from "./formatting/bidirectional";
 import { Border, ThematicBreak } from "./formatting/border";
@@ -50,7 +51,6 @@ export class Paragraph extends XmlComponent {
     }
     public addMath(mathMl: MathML): Paragraph {
         this.root.push(mathMl);
-        console.log('adding XML for math******', JSON.stringify(mathMl));
         return this;
     }
 

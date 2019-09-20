@@ -43,6 +43,7 @@ export class Compiler {
     public compile(file: File): JSZip {
         const zip = new JSZip();
         const xmlifiedFileMapping = this.xmlifyFile(file);
+        
          for (const key in xmlifiedFileMapping) {
             if (!xmlifiedFileMapping[key]) {
                 continue;
