@@ -13,15 +13,18 @@ function removeXmlTag(xml: string): string {
 }
 
 function finalXml(xml: string): string {
-    let xmlReplaced = xml;
-    let i = 0;
-    if (Array.isArray(math)) {
-        for (const val of math) {
-            xmlReplaced = xmlReplaced.replace(`<mathPlaceholder${i}/>`, val);
-            i++;
+    if (math && math.length) {
+        let xmlReplaced = xml;
+        let i = 0;
+        if (Array.isArray(math)) {
+            for (const val of math) {
+                xmlReplaced = xmlReplaced.replace(`<mathPlaceholder${i}/>`, val);
+                i++;
+            }
         }
+        return xmlReplaced;
     }
-    return xmlReplaced;
+    return xml;
 }
 
 export {

@@ -43,8 +43,8 @@ export class Compiler {
     public compile(file: File): JSZip {
         const zip = new JSZip();
         const xmlifiedFileMapping = this.xmlifyFile(file);
-        
-         for (const key in xmlifiedFileMapping) {
+
+        for (const key in xmlifiedFileMapping) {
             if (!xmlifiedFileMapping[key]) {
                 continue;
             }
@@ -97,8 +97,8 @@ export class Compiler {
                     const mediaDatas = this.imageReplacer.getMediaData(tempXmlData, file.Media);
                     const xmlData = this.imageReplacer.replace(tempXmlData, mediaDatas, documentRelationshipCount);
                     const finalXmlData = finalXml(xmlData);
+                    
                     return finalXmlData;
-
                 })(),
                 path: "word/document.xml",
             },
