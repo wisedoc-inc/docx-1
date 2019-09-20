@@ -1,6 +1,6 @@
 {
   "name": "@wisedocnpm/wisedocx",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate .docx documents with JavaScript (formerly Office-Clippy)",
   "main": "build/index.js",
   "scripts": {
