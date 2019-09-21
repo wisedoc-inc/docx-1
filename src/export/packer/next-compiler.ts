@@ -6,6 +6,7 @@ import { Formatter } from "../formatter";
 import { ImageReplacer } from "./image-replacer";
 
 import { finalXml } from "../../file/paragraph/math/mathml";
+import { find } from "./find";
 
 interface IXmlifyedFile {
     readonly data: string;
@@ -96,9 +97,16 @@ export class Compiler {
                     const tempXmlData = xml(this.formatter.format(file.Document), this.prettifyXml);
                     const mediaDatas = this.imageReplacer.getMediaData(tempXmlData, file.Media);
                     const xmlData = this.imageReplacer.replace(tempXmlData, mediaDatas, documentRelationshipCount);
-                    const finalXmlData = finalXml(xmlData);
-                    
-                    return finalXmlData;
+
+                    const documentObject = file.Document;
+                    const findMath = find(documentObject);
+                    /* do the following operations only if math is present */
+                    if (findMath && findMath.length) {
+                        const finalXmlData = finalXml(xmlData, findMath);
+                        return finalXmlData;
+                    } else {
+                        return xmlData;
+                    }
                 })(),
                 path: "word/document.xml",
             },

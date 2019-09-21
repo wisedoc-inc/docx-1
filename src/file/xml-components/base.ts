@@ -5,6 +5,9 @@ export abstract class BaseXmlComponent {
     // tslint:disable-next-line:readonly-keyword
     protected deleted: boolean = false;
 
+    // tslint:disable-next-line: readonly-keyword
+    protected xmlCode: string;
+
     constructor(rootKey: string) {
         this.rootKey = rootKey;
     }

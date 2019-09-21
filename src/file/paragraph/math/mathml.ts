@@ -1,7 +1,6 @@
-const math: string[] = [];
-function mathArray(OMML: string): void {
+function mathArray(OMML: string): string {
     const finalOMML = removeXmlTag(OMML);
-    math.push(finalOMML);
+    return finalOMML;
 }
 
 function removeXmlTag(xml: string): string {
@@ -12,7 +11,9 @@ function removeXmlTag(xml: string): string {
     return slicedXml;
 }
 
-function finalXml(xml: string): string {
+/* finalXml replaces the custom placeholder tags, added for math, with OMML */
+// tslint:disable-next-line: no-any
+function finalXml(xml: string, math: any): string {
     if (math && math.length) {
         let xmlReplaced = xml;
         let i = 0;

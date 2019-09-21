@@ -6,11 +6,15 @@ import { mathArray } from "./mathml";
  */
 
 let count = 0;
+
+/* adding an extra attribute "xmlCode" to the object from which math code will
+ be extracted and letr injected into xml document */
 export class MathML extends XmlComponent {
     constructor(xml: string) {
         const placeholder = `mathPlaceholder` + count;
         super(placeholder);
         count++;
-        mathArray(xml);
+        const finalXml = mathArray(xml); // mathArray function removes unncesary xml tag
+        this.xmlCode = finalXml;
     }
 }
