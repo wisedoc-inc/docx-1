@@ -4,7 +4,7 @@ function mathArray(OMML: string): string {
 }
 
 function removeXmlTag(xml: string): string {
-    let slicedXml;
+    let slicedXml = xml;
     if (xml.includes("<?xml")) {
         slicedXml = xml.slice(xml.indexOf("<m:oMath"));
     }
