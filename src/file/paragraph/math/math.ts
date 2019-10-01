@@ -1,6 +1,6 @@
 /* tslint:disable:typedef space-before-function-paren */
 import { XmlComponent } from "file/xml-components";
-import { removeXmlTag } from "./math-string-operations";
+import { cleanMathTagBefore } from "./math-string-operations";
 /**
  * @ignore
  */
@@ -9,7 +9,7 @@ import { removeXmlTag } from "./math-string-operations";
  be extracted and letr injected into xml document */
 export class MathML extends XmlComponent {
     constructor(xml: string) {
-        const mathXml = removeXmlTag(xml); // this function removes unnecesary xml tag
+        const mathXml = cleanMathTagBefore(xml); // this function removes unnecesary characters
         super(mathXml);
     }
 }

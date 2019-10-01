@@ -2,7 +2,7 @@ import * as JSZip from "jszip";
 import * as xml from "xml";
 
 import { File } from "file";
-import { cleanMathTag, mathTag } from "../../file/paragraph/math/math-string-operations";
+import { cleanMathTagAfter, mathTag } from "../../file/paragraph/math/math-string-operations";
 import { Formatter } from "../formatter";
 import { ImageReplacer } from "./image-replacer";
 interface IXmlifyedFile {
@@ -98,7 +98,7 @@ export class Compiler {
                     /* oMath tag needs to be formatted correctly if
                      the document has any equation in it */
                     if (xmlData.includes(mathTag)) {
-                        finalStr = cleanMathTag(xmlData);
+                        finalStr = cleanMathTagAfter(xmlData);
                     }
                     return finalStr;
                 })(),
