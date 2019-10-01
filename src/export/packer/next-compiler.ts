@@ -2,12 +2,9 @@ import * as JSZip from "jszip";
 import * as xml from "xml";
 
 import { File } from "file";
+import { cleanMathTag, mathTag } from "../../file/paragraph/math/math-string-operations";
 import { Formatter } from "../formatter";
 import { ImageReplacer } from "./image-replacer";
-
-import { finalXml } from "../../file/paragraph/math/mathml";
-import { find } from "./find";
-
 interface IXmlifyedFile {
     readonly data: string;
     readonly path: string;
@@ -97,16 +94,13 @@ export class Compiler {
                     const tempXmlData = xml(this.formatter.format(file.Document), this.prettifyXml);
                     const mediaDatas = this.imageReplacer.getMediaData(tempXmlData, file.Media);
                     const xmlData = this.imageReplacer.replace(tempXmlData, mediaDatas, documentRelationshipCount);
-
-                    const documentObject = file.Document;
-                    const findMath = find(documentObject);
-                    /* do the following operations only if math is present */
-                    if (findMath && findMath.length) {
-                        const finalXmlData = finalXml(xmlData, findMath);
-                        return finalXmlData;
-                    } else {
-                        return xmlData;
+                    let finalStr = xmlData;
+                    /* oMath tag needs to be formatted correctly if
+                     the document has any equation in it */
+                    if (xmlData.includes(mathTag)) {
+                        finalStr = cleanMathTag(xmlData);
                     }
+                    return finalStr;
                 })(),
                 path: "word/document.xml",
             },
