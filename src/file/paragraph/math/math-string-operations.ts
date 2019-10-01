@@ -1,18 +1,17 @@
 const mathTag: string = "</m:oMath>/>";
 
-/* This function removes any xml tags that are prepended to math */
-function removeXmlTag(xml: string): string {
+/* This function removes any unnecesary characters before the o:Math tag */
+function cleanMathTagBefore(xml: string): string {
     let slicedXml = xml;
-    if (xml.includes("<?xml")) {
-        slicedXml = xml.slice(xml.indexOf("m:oMath"));
-    }
+    slicedXml = xml.slice(xml.indexOf("m:oMath"));
+
     return slicedXml;
 }
 
 /* This function removes any excess /> that might get appended to math */
-function cleanMathTag(xml: string): string {
+function cleanMathTagAfter(xml: string): string {
     return xml.replace(/<\/m:oMath>\/>/g, "</m:oMath>");
 }
 
 
-export { removeXmlTag, cleanMathTag, mathTag };
+export { cleanMathTagBefore, cleanMathTagAfter, mathTag };
